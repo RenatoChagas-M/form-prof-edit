@@ -36,7 +36,7 @@ const allStates = ref([
   'MS',
   'MG',
   'PA',
-  'PB'
+  'PB',
   'PR',
   'PE',
   'PI',
