@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 const infoUser = ref({
   name: '',
@@ -13,6 +13,8 @@ const infoUser = ref({
   bio: '',
 })
 
+const confirmPassword = ref("")
+
 const userCity = ref([""])
 
 const showProfile = ref(false)
@@ -22,119 +24,174 @@ function saveprofile() {
 }
 
 const allStates = ref([
-  {'nome':'Acre', 'sigla': 'AC'},
-  {'nome':'Alagoas', 'sigla': 'AL'},
-  {'nome':'Amapá', 'sigla': 'AP'},
-  {'nome':'Amazonas', 'sigla': 'AM'},
-  {'nome':'Bahia', 'sigla': 'BA'},
-  {'nome':'Ceará', 'sigla': 'CE'},
-  {'nome':'Distrito Federal', 'sigla': 'DF'},
-  {'nome':'Espírito Santo', 'sigla': 'ES'},
-  {'nome':'Goiás', 'sigla': 'GO'},
-  {'nome':'Maranhão', 'sigla': 'MA'},
-  {'nome':'Mato Grosso', 'sigla': 'MT'},
-  {'nome':'Mato Grosso do Sul', 'sigla': 'MS'},
-  {'nome':'Minas Gerais', 'sigla': 'MG'},
-  {'nome':'Pará', 'sigla': 'PA'},
-  {'nome':'Paraíba', 'sigla': 'PB'},
-  {'nome':'Paraná', 'sigla': 'PR'},
-  {'nome':'Pernambuco', 'sigla': 'PE'},
-  {'nome':'Piauí', 'sigla': 'PI'},
-  {'nome':'Rio de Janeiro', 'sigla': 'RJ'},
-  {'nome':'Rio Grande do Norte', 'sigla': 'RN'},
-  {'nome':'Rio Grande do Sul', 'sigla': 'RS'},
-  {'nome':'Rondônia', 'sigla': 'RO'},
-  {'nome':'Roraima', 'sigla': 'RR'},
-  {'nome':'Santa Catarina', 'sigla': 'SC'},
-  {'nome':'São Paulo', 'sigla': 'SP'},
-  {'nome':'Sergipe', 'sigla': 'SE'},
-  {'nome':'Tocantins', 'sigla': 'TO'}
+  { 'name': 'Estado', 'sigla': '' },
+  { 'name': 'Acre', 'sigla': 'AC-' },
+  { 'name': 'Alagoas', 'sigla': 'AL-' },
+  { 'name': 'Amapá', 'sigla': 'AP-' },
+  { 'name': 'Amazonas', 'sigla': 'AM-' },
+  { 'name': 'Bahia', 'sigla': 'BA-' },
+  { 'name': 'Ceará', 'sigla': 'CE-' },
+  { 'name': 'Distrito Federal', 'sigla': 'DF-' },
+  { 'name': 'Espírito Santo', 'sigla': 'ES-' },
+  { 'name': 'Goiás', 'sigla': 'GO-' },
+  { 'name': 'Maranhão', 'sigla': 'MA-' },
+  { 'name': 'Mato Grosso', 'sigla': 'MT-' },
+  { 'name': 'Mato Grosso do Sul', 'sigla': 'MS-' },
+  { 'name': 'Minas Gerais', 'sigla': 'MG-' },
+  { 'name': 'Pará', 'sigla': 'PA-' },
+  { 'name': 'Paraíba', 'sigla': 'PB-' },
+  { 'name': 'Paraná', 'sigla': 'PR-' },
+  { 'name': 'Pernambuco', 'sigla': 'PE-' },
+  { 'name': 'Piauí', 'sigla': 'PI-' },
+  { 'name': 'Rio de Janeiro', 'sigla': 'RJ-' },
+  { 'name': 'Rio Grande do Norte', 'sigla': 'RN-' },
+  { 'name': 'Rio Grande do Sul', 'sigla': 'RS-' },
+  { 'name': 'Rondônia', 'sigla': 'RO-' },
+  { 'name': 'Roraima', 'sigla': 'RR-' },
+  { 'name': 'Santa Catarina', 'sigla': 'SC-' },
+  { 'name': 'São Paulo', 'sigla': 'SP-' },
+  { 'name': 'Sergipe', 'sigla': 'SE-' },
+  { 'name': 'Tocantins', 'sigla': 'TO-' },
+  { 'name': 'Estrangeiro', 'sigla': 'EX-' }
 ])
+
+const userImg = reactive({
+  avatar: null
+})
+
+function saveProfileImg(e) {
+  const target = e.target
+  if (target && target.files && target.files.length > 0) {
+    const file = target.files[0]
+    userImg.avatar = URL.createObjectURL(file)
+  }
+}
 
 </script>
 
 <template>
   <main>
-    <transition name="form" mode="out-in">
-      <section v-if="showProfile" class="user-form">
-        <div class="userSaved-informations">
+    <aside>
+      <transition name="form" mode="out-in">
+        <section v-if="showProfile" class="user-form">
+          <div class="userSaved-informations">
 
-          <div class="saved-information-title">
-            <p>Os Dados Informados:</p>
-          </div>
-
-          <div class="v-for-info">
-            <p v-for="(value, key) of infoUser" :key="key">{{ key }}: {{ value }}</p>
-          </div>
-
-        </div>
-
-        <div class="back-to-form">
-          <button @click="showProfile = false">Back</button>
-        </div>
-      </section>
-
-
-      <form v-else @submit.prevent="saveprofile()" validate>
-        <div class="user-information">
-          <div class="user-name">
-            <input placeholder="Please state your name" type="text" required>
-          </div>
-
-          <div class="user-email">
-            <input placeholder="Please state your email" type="email" required>
-          </div>
-
-          <div class="user-date-of-birth">
-            <input placeholder="Please state your date of birth" type="date" required>
-          </div>
-
-          <div class="user-addres">
-            <input placeholder="Please state your addres" type="text" required>
-          </div>
-
-          <div class="user-city">
-            <input placeholder="Please state your city" type="text" required>
-          </div>
-
-          <div class="user-state">
-            <label for="whichState">which stste do you live?</label>
-            <select name="States">
-              <option v-for="(value, index) of allStates" :key="index">{{value.sigla}}-{{value.nome}}</option>
-            </select>
-          </div>
-
-          <div class="check-boxes">
-            <div class="user-hobbies">
-              <label for="hobbies">State your hobbies:</label>
-              <input type="checkbox" value="read">Ler
-              <input type="checkbox" value="study">Estudar
-              <input type="checkbox" value="sports">Praticar esportes
-              <input type="checkbox" value="watch">Asissistir Coisas
-              <input type="checkbox" name="art">Arte
+            <div class="saved-information-title">
+              <p>Os Dados Informados:</p>
             </div>
 
-            <div class="user-prog-lang">
-              <label for="hobbies">State your hobbies:</label>
-              <input type="checkbox" value="js">JavaScript
-              <input type="checkbox" value="python">Python
-              <input type="checkbox" value="vue">Vue
-              <input type="checkbox" value="tp">TypesScript
+            <div class="v-for-info">
+              <p v-for="(value, key) of infoUser" :key="key">{{ key }}: {{ value }}</p>
+            </div>
+
+          </div>
+
+          <div class="back-to-form">
+            <button @click="showProfile = false">Back</button>
+          </div>
+        </section>
+
+
+        <form v-else @submit.prevent="saveprofile()" validate>
+          <div class="user-information">
+            <div class="user-name">
+              <input v-model="infoUser.name" placeholder="Please state your name" type="text" required>
+            </div>
+
+            <div class="user-email">
+              <input v-model="infoUser.email" placeholder="Please state your email" type="email" required>
+            </div>
+
+            <div class="user-password">
+              <input v-model="infoUser.password" placeholder="Please state your password" type="password" required>
+            </div>
+
+            <div class="user-verify-password">
+              <input v-model="confirmPassword" placeholder="Please confirm your password" type="password" required>
+              <p v-if="infoUser.password !== confirmPassword">try again, passwords dont match</p>
+            </div>
+
+            <div class="user-born">
+              <input v-model="infoUser.born" placeholder="Please state your born date" type="date" required>
+            </div>
+
+            <div class="user-address">
+              <input v-model="infoUser.address" placeholder="Please state your address" type="text" required>
+            </div>
+
+            <div class="user-city">
+              <input v-model="userCity" placeholder="Please state your city" type="text" required>
+            </div>
+
+            <div class="user-state">
+              <label for="whichState">which stste do you live?</label>
+              <select name="States">
+                <option v-for="(value, index) of allStates" :key="index">{{ value.sigla }}{{ value.name }}</option>
+              </select>
+            </div>
+
+            <div class="check-boxes">
+              <div class="user-hobbies">
+                <label for="hobbies">State your hobbies:</label>
+                <input type="checkbox" value="read">Ler
+                <input v-model="infoUser.hobbies" type="checkbox" value="study">Estudar
+                <input v-model="infoUser.hobbies" type="checkbox" value="play">Jogar
+                <input v-model="infoUser.hobbies" type="checkbox" value="watch">Assistir
+                <input v-model="infoUser.hobbies" type="checkbox" value="sporty">Esportes
+              </div>
+
+              <div class="user-prog-lang">
+                <label for="hobbies">State your favorite language:</label>
+                <input v-model="infoUser.progLang" type="radio" value="js">JavaScript
+                <input v-model="infoUser.progLang" type="radio" value="py">Python
+                <input v-model="infoUser.progLang" type="radio" value="java">Java
+                <input v-model="infoUser.progLang" type="radio" value="c">C
+              </div>
+            </div>
+
+            <div class="profile-image">
+              <input type="file" id="profileImg" accept="image/*" @change="saveProfileImg(e)">
+            </div>
+
+            <div class="biography">
+              <textarea name="bio" cols="50" rows="10" required></textarea>
             </div>
           </div>
 
-          <div class="biography">
-            <textarea name="bio" cols="50" rows="10" required></textarea>
+          <div class="sendButon">
+            <button class="save-send-button" type="submit"
+              :disabled="infoUser.password !== confirmPassword ? true : false">Send</button>
           </div>
-        </div>
+        </form>
 
-        <div class="sendButon">
-          <button class="save-send-button" type="submit">Send</button>
-        </div>
-      </form>
-
-    </transition>
+      </transition>
+    </aside>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*{
+  color: white;
+}
+
+main{
+  display: flex;
+  justify-content: end;
+  margin: 0vw 0vw 0px 0vw;
+  width: 100vw;
+  height: 100vh;
+}
+
+aside{
+
+  background-color: black;
+}
+
+</style>
