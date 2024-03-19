@@ -101,18 +101,18 @@ const alterarBooleano = () => {
                 <div class="user-hobbies">
                   <label for="hobbies">State your hobbies:</label>
                   <input type="checkbox" value="read">Ler
-                  <input v-model="infoUser.hobbies" type="checkbox" value="study">Estudar
-                  <input v-model="infoUser.hobbies" type="checkbox" value="play">Jogar
-                  <input v-model="infoUser.hobbies" type="checkbox" value="watch">Assistir
-                  <input v-model="infoUser.hobbies" type="checkbox" value="sporty">Esportes
+                  <input v-model="infoUser.hobbies" class="input-write" type="checkbox" value="study">Estudar
+                  <input v-model="infoUser.hobbies" class="input-write" type="checkbox" value="play">Jogar
+                  <input v-model="infoUser.hobbies" class="input-write" type="checkbox" value="watch">Assistir
+                  <input v-model="infoUser.hobbies" class="input-write" type="checkbox" value="sporty">Esportes
                 </div>
 
                 <div class="user-prog-lang">
                   <label for="hobbies">State your favorite language:</label>
-                  <input v-model="infoUser.progLang" type="radio" value="js">JavaScript
-                  <input v-model="infoUser.progLang" type="radio" value="py">Python
-                  <input v-model="infoUser.progLang" type="radio" value="java">Java
-                  <input v-model="infoUser.progLang" type="radio" value="c">C
+                  <input v-model="infoUser.progLang" class="input-write" type="radio" value="js">JavaScript
+                  <input v-model="infoUser.progLang" class="input-write" type="radio" value="py">Python
+                  <input v-model="infoUser.progLang" class="input-write" type="radio" value="java">Java
+                  <input v-model="infoUser.progLang" class="input-write" type="radio" value="c">C
                 </div>
 
               </div>
@@ -131,39 +131,48 @@ const alterarBooleano = () => {
               <div class="botao">
                 <button @click="showFormP2 = !showFormP2">Enviar</button>
               </div>
-
-
             </form>
 
             <form v-else-if="showFormP1">
+
+              <div class="tittle">
+                <h1>Register</h1>
+              </div>
+
               <div class="user-information">
-                <div class="user-name">
+                <div class="user-name above-inputs">
                   <input v-model="infoUser.name" placeholder="Please state your name" type="text" required>
                 </div>
 
-                <div class="user-email">
+                <div class="user-email above-inputs">
                   <input v-model="infoUser.email" placeholder="Please state your email" type="email" required>
                 </div>
 
-                <div class="user-password">
+                <div class="user-password above-inputs">
                   <input v-model="infoUser.password" placeholder="Please state your password" type="password" required>
                 </div>
 
-                <div class="user-verify-password">
+                <div class="user-verify-password above-inputs">
                   <input v-model="confirmPassword" placeholder="Please confirm your password" type="password" required>
                   <p v-if="infoUser.password !== confirmPassword">try again, passwords dont match</p>
                 </div>
 
-                <div class="user-born">
+                <div class="user-born above-inputs">
                   <input v-model="infoUser.born" placeholder="Please state your born date" type="date" required>
                 </div>
 
-                <div class="user-address">
+                <div class="user-address above-inputs">
                   <input v-model="infoUser.address" placeholder="Please state your address" type="text" required>
                 </div>
 
-                <div class="user-city">
+                <div class="user-city above-inputs">
                   <input v-model="userCity" placeholder="Please state your city" type="text" required>
+                </div>
+
+                <div class="user-states">
+                  <select>
+                  <option v-for="(value, index) of allStates" :key="index">{{ value.sigla }}{{ value.name }}</option>
+                </select>
                 </div>
               </div>
 
@@ -200,9 +209,37 @@ aside{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: rgb(247, 231, 231);
+  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
   margin: 0px 100px 0px 0px;
-  width: 30vw;
-  height: 40vh;
+  padding: 20px;
+  border-radius: 10px;
 }
+
+.user-information input{
+  border-radius: 10px;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0);
+  width: 25vw;
+  height: 3.5vh;;
+}
+
+.user-states select{
+  width: 25vw;
+  margin-bottom: 10px ;
+}
+
+.above-inputs{
+ margin: 15px 0px 15px 0px;
+}
+
+.tittle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
 </style>
