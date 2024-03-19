@@ -50,7 +50,7 @@ const allStates = ref([
 ])
 
 const userImg = reactive({
-  avatar: null
+  avatar: undefined
 })
 
 function saveProfileImg(e) {
