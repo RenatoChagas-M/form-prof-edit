@@ -89,7 +89,7 @@ const alterarBooleano = () => {
             </div>
 
             <div class="v-for-info">
-              <img v-if="userImg.avatar" :src="userImg.avatar">
+              <img class="img-user" v-if="userImg.avatar" :src="userImg.avatar">
               <p v-for=" (value, key) of infoUser" :key="key">{{ key }}: {{ value }}</p>
               <div class="hobbie-row">
                 <p>hobbies:</p>
@@ -323,5 +323,19 @@ user-states select {
   display: flex;
   flex-direction: row;
   gap: 20px;
+}
+
+.img-user {
+  display: flex;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+.v-for-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
 }
 </style>
