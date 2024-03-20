@@ -101,16 +101,22 @@ const alterarBooleano = () => {
 
         <div v-else @submit.prevent="" validate class="two-forms">
           <transition>
-            <form v-if="showFormP2">
-
+            <form v-if="showFormP2" class="forms-p2">
               <div class="check-boxes">
                 <div class="user-hobbies">
                   <label>State your hobbies:</label>
-                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="read">Ler
-                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="study">Estudar
-                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="play">Jogar
-                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="watch">Assistir
-                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="sporty">Esportes
+                  <div class="gap">
+                    <input v-model="infoHobbies" class="input-write" type="checkbox" value="read">Ler
+                  </div>
+                  <div class="gap">
+                    <input v-model="infoHobbies" class="input-write" type="checkbox" value="write">Escrever
+                  </div>
+                  <div class="gap">
+                    <input v-model="infoHobbies" class="input-write" type="checkbox" value="draw">Desenhar
+                  </div>
+                  <div class="gap">
+                    <input v-model="infoHobbies" class="input-write" type="checkbox" value="play">Jogar
+                  </div>
                 </div>
 
                 <div class="user-prog-lang">
@@ -120,7 +126,6 @@ const alterarBooleano = () => {
                   <input v-model="infoUser.progLang" class="input-write" type="radio" value="java">Java
                   <input v-model="infoUser.progLang" class="input-write" type="radio" value="c">C
                 </div>
-
               </div>
 
               <div class="profile-image">
@@ -130,12 +135,13 @@ const alterarBooleano = () => {
               <div class="biography">
                 <textarea v-model="infoUser.bio" name="bio" cols="50" rows="10" required></textarea>
               </div>
-
-              <div class="botao">
-                <button @click="alterarBooleano()">Voltar</button>
-              </div>
-              <div class="botao">
-                <button @click="showFormP2 = !showFormP2">Enviar</button>
+              <div class="buttons">
+                <div class="botao">
+                  <button @click="alterarBooleano()">Voltar</button>
+                </div>
+                <div class="botao">
+                  <button @click="showFormP2 = !showFormP2">Enviar</button>
+                </div>
               </div>
             </form>
 
@@ -168,7 +174,8 @@ const alterarBooleano = () => {
                 </div>
 
                 <div class="user-address above-inputs">
-                  <input v-model="infoUser.address" placeholder="Please state your address" type="text" required>
+                  <input class="buttons-f1" v-model="infoUser.address" placeholder="Please state your address"
+                    type="text" required>
                 </div>
 
                 <div class="user-city above-inputs">
@@ -214,31 +221,37 @@ main {
 
 aside {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(247, 231, 231);
+  background-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
   margin: 0px 100px 0px 0px;
+  width: 25vw;
+  height: 70vh;
   padding: 20px;
   border-radius: 10px;
 }
 
-.user-information input {
+.user-information input,
+user-states select {
   border-radius: 10px;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0);
-  width: 25vw;
-  height: 3.5vh;
-  ;
+  width: 20vw;
+  height: 4.5vh;
 }
 
-.user-states select {
-  width: 25vw;
-  margin-bottom: 10px;
+.user-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 
 .above-inputs {
-  margin: 15px 0px 15px 0px;
+  margin: 5px 0px 15px 0px;
 }
 
 .tittle {
@@ -247,8 +260,34 @@ aside {
   align-items: center;
 }
 
-.hobbie-row {
+.forms-p2 {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 30vw;
+  height: 20vh;
+  padding: 10px 20px 10px 20px;
+}
+
+.sendButon {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.save-send-button {
+  border-radius: 10px;
+  border: 2px solid black;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  width: 5vw;
+  height: 5vh;
+}
+
+.save-send-button:hover {
+  transition: all 1s ease-in-out;
+  background-color: rgb(255, 255, 255);
+  color: black;
 }
 </style>
