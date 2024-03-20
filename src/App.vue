@@ -74,6 +74,11 @@ const alterarBooleano = () => {
 
 <template>
   <main>
+
+    <div class="blur">
+
+    </div>
+
     <aside>
       <transition name="form" mode="out-in">
         <section v-if="!showFormP1 && !showFormP2" class="user-form">
@@ -102,29 +107,39 @@ const alterarBooleano = () => {
         <div v-else @submit.prevent="" validate class="two-forms">
           <transition>
             <form v-if="showFormP2" class="forms-p2">
-              <div class="check-boxes">
-                <div class="user-hobbies">
-                  <label>State your hobbies:</label>
-                  <div class="gap">
-                    <input v-model="infoHobbies" class="input-write" type="checkbox" value="read">Ler
-                  </div>
-                  <div class="gap">
-                    <input v-model="infoHobbies" class="input-write" type="checkbox" value="write">Escrever
-                  </div>
-                  <div class="gap">
-                    <input v-model="infoHobbies" class="input-write" type="checkbox" value="draw">Desenhar
-                  </div>
-                  <div class="gap">
-                    <input v-model="infoHobbies" class="input-write" type="checkbox" value="play">Jogar
+              <div class="boxes-checks">
+                <div class="check-boxes">
+                  <div class="user-hobbies">
+                    <label>State your hobbies:</label>
+                    <div class="gap">
+                      <input v-model="infoHobbies" class="input-write" type="checkbox" value="read">Ler
+                    </div>
+                    <div class="gap">
+                      <input v-model="infoHobbies" class="input-write" type="checkbox" value="write">Escrever
+                    </div>
+                    <div class="gap">
+                      <input v-model="infoHobbies" class="input-write" type="checkbox" value="draw">Desenhar
+                    </div>
+                    <div class="gap">
+                      <input v-model="infoHobbies" class="input-write" type="checkbox" value="play">Jogar
+                    </div>
                   </div>
                 </div>
 
                 <div class="user-prog-lang">
                   <label>State your favorite language:</label>
-                  <input v-model="infoUser.progLang" class="input-write" type="radio" value="js">JavaScript
-                  <input v-model="infoUser.progLang" class="input-write" type="radio" value="py">Python
-                  <input v-model="infoUser.progLang" class="input-write" type="radio" value="java">Java
-                  <input v-model="infoUser.progLang" class="input-write" type="radio" value="c">C
+                  <div class="gap">
+                    <input v-model="infoUser.progLang" class="input-write" type="radio" value="js">JavaScript
+                  </div>
+                  <div class="gap">
+                    <input v-model="infoUser.progLang" class="input-write" type="radio" value="py">Python
+                  </div>
+                  <div class="gap">
+                    <input v-model="infoUser.progLang" class="input-write" type="radio" value="java">Java
+                  </div>
+                  <div class="gap">
+                    <input v-model="infoUser.progLang" class="input-write" type="radio" value="c">C
+                  </div>
                 </div>
               </div>
 
@@ -133,7 +148,7 @@ const alterarBooleano = () => {
               </div>
 
               <div class="biography">
-                <textarea v-model="infoUser.bio" name="bio" cols="50" rows="10" required></textarea>
+                <textarea v-model="infoUser.bio" name="bio" cols="40" rows="8" required></textarea>
               </div>
               <div class="buttons">
                 <div class="botao">
@@ -174,8 +189,7 @@ const alterarBooleano = () => {
                 </div>
 
                 <div class="user-address above-inputs">
-                  <input class="buttons-f1" v-model="infoUser.address" placeholder="Please state your address"
-                    type="text" required>
+                  <input class="buttons-f1" v-model="infoUser.address" placeholder="Please state your address" required>
                 </div>
 
                 <div class="user-city above-inputs">
@@ -209,28 +223,37 @@ const alterarBooleano = () => {
 }
 
 main {
+  position: relative;
   align-items: center;
   display: flex;
-  justify-content: end;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-image: url(assets/images/fundo-de-pintura-abstrata-com-pintura-em-aquarela-multicolorida-gerada-por-ia_188544-15558.avif);
+  background-image: url(assets/images/e1519caf804117da6c0412380df0305b.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 0;
 }
 
 aside {
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
-  margin: 0px 100px 0px 0px;
   width: 25vw;
   height: 70vh;
   padding: 20px;
   border-radius: 10px;
+  z-index: 1;
+}
+
+.blur {
+  backdrop-filter: blur(5px);
+  width: 100vw;
+  height: 100vh;
 }
 
 .user-information input,
@@ -249,7 +272,6 @@ user-states select {
   align-items: center;
 }
 
-
 .above-inputs {
   margin: 5px 0px 15px 0px;
 }
@@ -258,16 +280,6 @@ user-states select {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.forms-p2 {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 30vw;
-  height: 20vh;
-  padding: 10px 20px 10px 20px;
 }
 
 .sendButon {
@@ -289,5 +301,27 @@ user-states select {
   transition: all 1s ease-in-out;
   background-color: rgb(255, 255, 255);
   color: black;
+}
+
+.user-prog-lang {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.forms-p2 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  height: 20vh;
+  padding: 10px 20px 10px 20px;
+}
+
+.boxes-checks {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 </style>
