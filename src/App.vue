@@ -8,10 +8,11 @@ const infoUser = ref({
   born: '',
   address: '',
   state: '',
-  hobbies: '',
   progLang: '',
   bio: '',
 })
+
+const infoHobbies = ref([])
 
 const confirmPassword = ref("")
 
@@ -83,7 +84,12 @@ const alterarBooleano = () => {
             </div>
 
             <div class="v-for-info">
-              <p v-for="(value, key) of infoUser" :key="key">{{ key }}: {{ value }}</p>
+              <img v-if="userImg.avatar" :src="userImg.avatar">
+              <p v-for=" (value, key) of infoUser" :key="key">{{ key }}: {{ value }}</p>
+              <div class="hobbie-row">
+                <p>hobbies:</p>
+                <p v-for="(value, key) of infoHobbies" :key="key"> {{ value }},</p>
+              </div>
             </div>
 
           </div>
@@ -99,16 +105,16 @@ const alterarBooleano = () => {
 
               <div class="check-boxes">
                 <div class="user-hobbies">
-                  <label for="hobbies">State your hobbies:</label>
-                  <input type="checkbox" value="read">Ler
-                  <input v-model="infoUser.hobbies" class="input-write" type="checkbox" value="study">Estudar
-                  <input v-model="infoUser.hobbies" class="input-write" type="checkbox" value="play">Jogar
-                  <input v-model="infoUser.hobbies" class="input-write" type="checkbox" value="watch">Assistir
-                  <input v-model="infoUser.hobbies" class="input-write" type="checkbox" value="sporty">Esportes
+                  <label>State your hobbies:</label>
+                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="read">Ler
+                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="study">Estudar
+                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="play">Jogar
+                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="watch">Assistir
+                  <input v-model="infoHobbies" class="input-write" type="checkbox" value="sporty">Esportes
                 </div>
 
                 <div class="user-prog-lang">
-                  <label for="hobbies">State your favorite language:</label>
+                  <label>State your favorite language:</label>
                   <input v-model="infoUser.progLang" class="input-write" type="radio" value="js">JavaScript
                   <input v-model="infoUser.progLang" class="input-write" type="radio" value="py">Python
                   <input v-model="infoUser.progLang" class="input-write" type="radio" value="java">Java
@@ -118,11 +124,11 @@ const alterarBooleano = () => {
               </div>
 
               <div class="profile-image">
-                <input type="file" id="profileImg" accept="image/*" @change="saveProfileImg(e)">
+                <input type="file" id="profileImg" accept="image/*" @input="saveProfileImg($event)">
               </div>
 
               <div class="biography">
-                <textarea name="bio" cols="50" rows="10" required></textarea>
+                <textarea v-model="infoUser.bio" name="bio" cols="50" rows="10" required></textarea>
               </div>
 
               <div class="botao">
@@ -170,9 +176,10 @@ const alterarBooleano = () => {
                 </div>
 
                 <div class="user-states">
-                  <select>
-                  <option v-for="(value, index) of allStates" :key="index">{{ value.sigla }}{{ value.name }}</option>
-                </select>
+                  <select v-model="infoUser.state">
+                    <option v-for="(value, index) of allStates" :key="index">{{ value.sigla
+                      }}{{ value.name }}</option>
+                  </select>
                 </div>
               </div>
 
@@ -194,7 +201,7 @@ const alterarBooleano = () => {
   box-sizing: border-box;
 }
 
-main{
+main {
   align-items: center;
   display: flex;
   justify-content: end;
@@ -205,7 +212,7 @@ main{
   background-size: cover;
 }
 
-aside{
+aside {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -216,30 +223,32 @@ aside{
   border-radius: 10px;
 }
 
-.user-information input{
+.user-information input {
   border-radius: 10px;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0);
   width: 25vw;
-  height: 3.5vh;;
+  height: 3.5vh;
+  ;
 }
 
-.user-states select{
+.user-states select {
   width: 25vw;
-  margin-bottom: 10px ;
+  margin-bottom: 10px;
 }
 
-.above-inputs{
- margin: 15px 0px 15px 0px;
+.above-inputs {
+  margin: 15px 0px 15px 0px;
 }
 
-.tittle{
+.tittle {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
-
-
+.hobbie-row {
+  display: flex;
+  flex-direction: row;
+}
 </style>
