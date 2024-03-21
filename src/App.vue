@@ -321,8 +321,10 @@ user-states select {
 
 .boxes-checks {
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   gap: 20px;
+  margin-bottom: 250px;
 }
 
 .img-user {
@@ -336,6 +338,6 @@ user-states select {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
 </style>
