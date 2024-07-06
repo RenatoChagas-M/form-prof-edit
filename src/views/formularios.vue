@@ -72,9 +72,15 @@ function tradeSCreen2(){
 }
 
 function tradeScreen1(){
-  showFormP1.value = !showFormP1.value
-  showFormP2.value = !showFormP2.value
+  if(infoUser.value.password !== confirmPassword.value){
+    alert("try again, passwords dont match")
+  }
+  else{
+    showFormP1.value = !showFormP1.value
+    showFormP2.value = !showFormP2.value
+  }
 }
+
 
 </script>
 
@@ -125,8 +131,8 @@ function tradeScreen1(){
               </select>
             </div>
           </div>
-          <div class="flex justify-center p-8 w-full h-auto">
-            <button type="submit" class="w-24 h-10 bg-black text-white rounded-2xl"> Proxima </button>
+          <div class="flex justify-center p-8 w-full h-auto :">
+            <button type="submit" class="w-24 h-10 bg-black text-white rounded-2xl" > Proxima </button>
           </div>
         </section>
       </form>
