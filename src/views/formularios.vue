@@ -78,6 +78,7 @@ function tradeScreen1(){
 
 </script>
 
+<!--formulario abaixo-->
 <template>
   <transition name="form" mode="out-in">
     <main>
